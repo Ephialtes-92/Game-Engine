@@ -58,6 +58,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>HF_PLATFORM_WINDOWS;HF_BUILD_DLL</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)GameEngine\ThirdParty\spdlog\include;</AdditionalIncludeDirectories>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -72,6 +74,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>HF_PLATFORM_WINDOWS;HF_BUILD_DLL</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)GameEngine\ThirdParty\spdlog\include;</AdditionalIncludeDirectories>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -81,12 +85,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\hf\Log.h" />
     <ClInclude Include="src\Hephaestus.h" />
     <ClInclude Include="src\hf\app.h" />
     <ClInclude Include="src\hf\Core.h" />
     <ClInclude Include="src\hf\EntryPoint.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\hf\Log.cpp" />
     <ClCompile Include="src\hf\app.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

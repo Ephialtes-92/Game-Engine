@@ -11,7 +11,7 @@ namespace hf::Event {
         template<typename T, typename F>
         bool Dispatch(const F& func)
         {
-            if (m_Event.GetEventType() == T::GetStaticType())
+            if (m_Event.GetEventType() == T::StaticType)
             {
                 m_Event.m_Handled = func(static_cast<T&>(m_Event));
                 return true;

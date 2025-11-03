@@ -1,5 +1,7 @@
 #include "app.h"
 #include "Log.h"
+#include "Events/EventDispatcher.h"
+#include "Events/WindowEvent.h"
 
 namespace hf
 {
@@ -22,11 +24,14 @@ namespace hf
 	}
     void app::OnEvent(Event::Event& event)
     {
-        if (event.GetEventType() == hf::Event::EventType::WindowClose)
-        {
-            HF_CORE_WARN("Window Closed");
-            event.m_Handled = true;
-        }
+        Event::EventDispatcher dispatcher(event);
+
+        //Handle WindowCloseEvent
+        dispatcher.Dispatch<Event::WindowCloseEvent>([this](Event::WindowCloseEvent& event) {
+            HF_CORE_WARN("Window Closed 22");
+            return true; 
+            });
+
 
     }
 }

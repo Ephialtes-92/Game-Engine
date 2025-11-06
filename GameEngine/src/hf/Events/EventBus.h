@@ -9,21 +9,18 @@
 
 namespace hf::Event {
     class EventBus {
-    public:
-        EventBus()
-            : m_Running(true), m_Worker(&EventBus::Run, this)
-        {}
-        ~EventBus();
 
+    public: 
         void AddListener(IEventListener* listener);
         void RemoveListener(IEventListener* listener);
         void PushEvent(std::unique_ptr<Event> event);
-        void Stop();
+        void DispatchPending();
+        void DispatchToListeners(Event& event);
+        //void Stop();
 
     private:
-
-        void Run();
-        void DispatchEvent(Event& event);
+        //void Run();
+        //void DispatchEvent(Event& event);
 
         Containers::ThreadSafeQueue<std::unique_ptr<Event>> m_Queue;
         std::vector<IEventListener*> m_Listeners;

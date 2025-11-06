@@ -13,7 +13,7 @@ namespace hf
 
     hf::app::~app()
 	{
-        m_EventBus.Stop();
+        //m_EventBus.Stop();
 	}
 
 	void app::Run()
@@ -23,6 +23,7 @@ namespace hf
         {
             // Simulate OS events
             m_Window.PollEvents();
+            m_EventBus.DispatchPending();
 
         }
 	}
@@ -32,7 +33,6 @@ namespace hf
 
         //Handle WindowCloseEvent
         dispatcher.Dispatch<Event::WindowCloseEvent>([this](Event::WindowCloseEvent& event) {
-
             // Game logic, rendering, etc.
             std::this_thread::sleep_for(std::chrono::milliseconds(500));
 

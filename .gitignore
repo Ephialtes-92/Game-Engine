@@ -12,3 +12,4 @@ bin-int/
 *.sln
 *.vcxproj
 *.filters
+/Hephaestus.sln

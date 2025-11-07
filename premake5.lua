@@ -27,7 +27,13 @@ project "GameEngine"
     includedirs
     {
         "%{prj.location}/src",
-        "%{prj.location}/ThirdParty/spdlog/include"
+        "%{prj.location}/ThirdParty/spdlog/include",
+        "%{prj.location}/ThirdParty/glfw/include"
+    }
+
+    links
+    {
+        "glfw"
     }
 
     filter "system:windows"
@@ -62,6 +68,8 @@ project "GameEngine"
 
     --filter { "system:windows", "configurations:Release"}
         --buildoptions "/MT"
+    
+include "GameEngine/ThirdParty/glfw"
 
 project "Sandbox"
     location "Sandbox"
@@ -111,3 +119,4 @@ project "Sandbox"
     filter "configurations:Retail"
         defines "HF_RETAIL"
         optimize "On"
+

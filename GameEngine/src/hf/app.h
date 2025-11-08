@@ -19,7 +19,7 @@ namespace hf
         void OnEvent(Event::Event& e) override;
     
     private:
-        Window::Window m_Window;
+        std::unique_ptr<Window> m_Window;
         bool m_Running = true;
         Event::EventBus m_EventBus;
 	};

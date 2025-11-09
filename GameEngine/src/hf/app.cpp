@@ -33,9 +33,8 @@ namespace hf
         while (m_Running)
         {
             // Simulate OS events
-            m_Window->Update();
             m_EventBus.DispatchPending();
-
+            m_Window->Update();
         }
 	}
     void app::OnEvent(Event::Event& event)
@@ -43,11 +42,9 @@ namespace hf
         Event::EventDispatcher dispatcher(event);
 
         //Handle WindowCloseEvent
+        //HF_CORE_INFO("{}", event); //TODO: make this compile
         dispatcher.Dispatch<Event::WindowCloseEvent>([this](Event::WindowCloseEvent& event) {
-            // Game logic, rendering, etc.
-            std::this_thread::sleep_for(std::chrono::milliseconds(500));
-
-            HF_CORE_WARN("Window Closed 22");
+            m_Running = false;
             return true; 
             });
 

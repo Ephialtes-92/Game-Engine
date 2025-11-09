@@ -29,13 +29,17 @@ namespace hf
         virtual bool Init() = 0;
 
         virtual void Update() = 0;
-        virtual void OnUpdate() = 0;
 
         virtual void SetVSync(bool enabled) = 0;
         virtual bool IsVSync() const = 0;
 
-    private:
+    protected:
         hf::Event::EventBus& m_EventBus;
+
+    private:
+
+        //Window events
+        virtual void OnClose() = 0;
     };
 }
 

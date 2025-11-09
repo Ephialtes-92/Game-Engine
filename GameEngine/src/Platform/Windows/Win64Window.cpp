@@ -1,6 +1,9 @@
 #include "Win64Window.h"
 #include "hf/Log.h"
 
+//Events
+#include "hf/Events/WindowEvent.h"
+
 hf::Win64Window::Win64Window(hf::Event::EventBus& eventBus, hf::WindowParameters& params)
 	:hf::Window(eventBus)
 {
@@ -12,10 +15,6 @@ hf::Win64Window::Win64Window(hf::Event::EventBus& eventBus, hf::WindowParameters
 hf::Win64Window::~Win64Window()
 {
 	glfwDestroyWindow(m_Window);
-	if (glfwInit())
-	{
-		glfwTerminate();
-	}
 }
 
 bool hf::Win64Window::Init()
@@ -36,6 +35,26 @@ bool hf::Win64Window::Init()
 	}
 	glfwMakeContextCurrent(m_Window);
 	SetVSync(true);
+
+	//Store *this inside the GLFW window
+	glfwSetWindowUserPointer(m_Window, this);
+
+	//This lambda needs to be a valid C function pointer
+	//so it cannot capture anything
+	glfwSetWindowCloseCallback(m_Window, [](GLFWwindow* window)
+	{
+		//Retrieve the Window instance that owns this GLFW window
+		auto* self = static_cast<Win64Window*>(glfwGetWindowUserPointer(window));
+		if (self)
+		{
+			self->OnClose();
+		}
+	});
+
+
+
+
+
 	return true;
 }
 
@@ -43,10 +62,6 @@ void hf::Win64Window::Update()
 {
 	glfwPollEvents();
 	glfwSwapBuffers(m_Window);
-}
-
-void hf::Win64Window::OnUpdate()
-{
 }
 
 void hf::Win64Window::SetVSync(bool enabled)
@@ -57,4 +72,9 @@ void hf::Win64Window::SetVSync(bool enabled)
 bool hf::Win64Window::IsVSync() const
 {
 	return false;
+}
+
+void hf::Win64Window::OnClose()
+{
+	m_EventBus.PushEvent(std::make_unique<hf::Event::WindowCloseEvent>());
 }

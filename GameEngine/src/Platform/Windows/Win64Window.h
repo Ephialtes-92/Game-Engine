@@ -12,7 +12,6 @@ namespace hf
 		bool Init() override;
 
 		void Update() override;
-		void OnUpdate() override;
 
 		void SetVSync(bool enabled) override;
 		bool IsVSync() const override;
@@ -28,5 +27,8 @@ namespace hf
 
 	private:
 		WindowData m_WindowData;
+
+		//Window events
+		virtual void OnClose();
 	};
 }

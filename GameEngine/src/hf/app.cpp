@@ -33,7 +33,7 @@ namespace hf
         while (m_Running)
         {
             // Simulate OS events
-            m_Window->PollEvents();
+            m_Window->Update();
             m_EventBus.DispatchPending();
 
         }

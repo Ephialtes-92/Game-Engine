@@ -3,19 +3,30 @@
 
 namespace hf
 {
-	class Win64Window : public Window
+	class HF_API Win64Window : public Window
 	{
 	public:
 		Win64Window(Event::EventBus& eventBus, WindowParameters& params);
+		virtual ~Win64Window();
 
 		bool Init() override;
 
-		void PollEvents() override;
+		void Update() override;
 		void OnUpdate() override;
 
 		void SetVSync(bool enabled) override;
 		bool IsVSync() const override;
 
 		GLFWwindow* m_Window;
+
+		struct WindowData 
+		{
+			unsigned int Width = 0;
+			unsigned int Height = 0;
+			std::string Title = "";
+		};
+
+	private:
+		WindowData m_WindowData;
 	};
 }

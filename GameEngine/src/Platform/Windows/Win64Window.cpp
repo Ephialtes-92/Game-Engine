@@ -76,5 +76,5 @@ bool hf::Win64Window::IsVSync() const
 
 void hf::Win64Window::OnClose()
 {
-	m_EventBus.PushEvent(std::make_unique<hf::Event::WindowCloseEvent>());
+	m_EventBus.PushBlockingEvent(std::make_unique<hf::Event::WindowCloseEvent>());
 }

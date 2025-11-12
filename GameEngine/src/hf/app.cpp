@@ -42,7 +42,7 @@ namespace hf
         Event::EventDispatcher dispatcher(event);
 
         //Handle WindowCloseEvent
-        //HF_CORE_INFO("{}", event); //TODO: make this compile
+        HF_CORE_INFO("{}", event.ToString()); //TODO: make this compile
         dispatcher.Dispatch<Event::WindowCloseEvent>([this](Event::WindowCloseEvent& event) {
             m_Running = false;
             return true; 

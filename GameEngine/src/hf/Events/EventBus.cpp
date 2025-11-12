@@ -18,6 +18,12 @@ void hf::Event::EventBus::PushEvent(std::unique_ptr<Event> event)
     m_Queue.Push(std::move(event));
 }
 
+//Used to handle blocking events on the main thread
+void hf::Event::EventBus::PushBlockingEvent(std::unique_ptr<Event> event)
+{
+    DispatchToListeners(*event);
+}
+
 //Calle donly from the main thread
 void hf::Event::EventBus::DispatchPending()
 {

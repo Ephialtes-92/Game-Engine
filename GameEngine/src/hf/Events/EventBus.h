@@ -14,6 +14,7 @@ namespace hf::Event {
         void AddListener(IEventListener* listener);
         void RemoveListener(IEventListener* listener);
         void PushEvent(std::unique_ptr<Event> event);
+        void PushBlockingEvent(std::unique_ptr<Event> event);
         void DispatchPending();
         void DispatchToListeners(Event& event);
         //void Stop();

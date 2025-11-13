@@ -48,6 +48,16 @@ namespace hf
             return true; 
             });
 
+        //Handle window resize event
+        dispatcher.Dispatch<Event::WindowResizeEvent>([](Event::WindowResizeEvent& event) {
+            HF_CORE_INFO("Window resized to {}x{}", event.GetWidth(), event.GetHeight());
+            return true;
+            });
 
+        //Handle GLFW error event
+        dispatcher.Dispatch<Event::GLFWErrorEvent>([](Event::GLFWErrorEvent& event) {
+            HF_CORE_ERROR("GLFW Error Event received: {}", event.ToString());
+            return true;
+            });
     }
 }

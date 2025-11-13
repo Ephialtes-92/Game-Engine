@@ -37,4 +37,23 @@ namespace hf::Event {
         int m_Width = 0;
         int m_Height = 0;
     };
+
+    class GLFWErrorEvent : public Event
+    {
+    public:
+        GLFWErrorEvent(int errorCode, const std::string& description)
+            : m_ErrorCode(errorCode), m_Description(description) {
+        }
+        EventType GetEventType() const override { return EventType::GLFWError; }
+        const char* GetName() const override { return "GLFWError"; }
+        std::string ToString() const override
+        {
+            return "GLFWError: " + std::to_string(m_ErrorCode) + ", " + m_Description;
+        }
+
+
+    private:
+        int m_ErrorCode;
+        std::string m_Description;
+    };
 }

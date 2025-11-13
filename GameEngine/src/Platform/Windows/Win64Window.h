@@ -28,7 +28,11 @@ namespace hf
 	private:
 		WindowData m_WindowData;
 
+        //GLFW Error Callback
+        void GLFWErrorCallback(int error, const char* description);
+
 		//Window events
 		virtual void OnClose();
+        virtual void OnResize(int width, int height);
 	};
 }

@@ -40,6 +40,7 @@ namespace hf
 
         //Window events
         virtual void OnClose() = 0;
+        virtual void OnResize(int width, int height) = 0;
     };
 }
 

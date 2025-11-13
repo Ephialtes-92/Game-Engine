@@ -19,6 +19,17 @@ hf::Win64Window::~Win64Window()
 
 bool hf::Win64Window::Init()
 {
+    //Error callback must be set before glfwInit
+    //glfwSetErrorCallback(GLFWErrorCallback);
+    glfwSetErrorCallback([](int error, const char* description)
+        {
+            auto* self = static_cast<Win64Window*>(glfwGetWindowUserPointer(glfwGetCurrentContext()));
+            if (self)
+            {
+                self->GLFWErrorCallback(error, description);
+            }
+        });
+
 	if (!glfwInit())
 	{
 		//Failed to initialise the window
@@ -51,9 +62,14 @@ bool hf::Win64Window::Init()
 		}
 	});
 
-
-
-
+    glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, int width, int height)
+        {
+            auto* self = static_cast<Win64Window*>(glfwGetWindowUserPointer(window));
+            if (self)
+            {
+                self->OnResize(width, height);
+            }
+        });
 
 	return true;
 }
@@ -74,7 +90,17 @@ bool hf::Win64Window::IsVSync() const
 	return false;
 }
 
+void hf::Win64Window::GLFWErrorCallback(int error, const char* description)
+{
+    m_EventBus.PushBlockingEvent(std::make_unique<hf::Event::GLFWErrorEvent>(error, description));
+}
+
 void hf::Win64Window::OnClose()
 {
 	m_EventBus.PushBlockingEvent(std::make_unique<hf::Event::WindowCloseEvent>());
+}
+
+void hf::Win64Window::OnResize(int width, int height)
+{
+    m_EventBus.PushBlockingEvent(std::make_unique<hf::Event::WindowResizeEvent>(width, height));
 }

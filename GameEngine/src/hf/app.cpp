@@ -35,6 +35,12 @@ namespace hf
             // Simulate OS events
             m_EventBus.DispatchPending();
             m_Window->Update();
+
+            //Update layers
+            for (Layer::Layer* layer : m_LayerStack)
+            {
+                layer->OnUpdate(0.016f);
+            }
         }
 	}
     void app::OnEvent(Event::Event& event)
@@ -59,5 +65,20 @@ namespace hf
             HF_CORE_ERROR("GLFW Error Event received: {}", event.ToString());
             return true;
             });
+
+        for (auto it = m_LayerStack.end(); it != m_LayerStack.begin(); )
+        {
+            (*--it)->OnEvent(event);
+            if (event.IsHandled())
+                break;
+        }
+    }
+    void app::PushLayer(Layer::Layer* layer)
+    {
+        m_LayerStack.PushLayer(layer);
+    }
+    void app::PushOverlay(Layer::Layer* overlay)
+    {
+        m_LayerStack.PushOverlay(overlay);
     }
 }

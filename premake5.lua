@@ -57,15 +57,18 @@ project "GameEngine"
     filter "configurations:Debug"
         defines "HF_DEBUG"
         symbols "On"
+        buildoptions "/MDd"
 
     filter "configurations:Release"
         defines "HF_RELEASE"
         symbols "On"
         optimize "On"
+        buildoptions "/MDd"
 
     filter "configurations:Retail"
         defines "HF_RETAIL"
         optimize "On"
+        buildoptions "/MDd"
 
     --filter { "system:windows", "configurations:Release"}
         --buildoptions "/MT"
@@ -111,13 +114,16 @@ project "Sandbox"
     filter "configurations:Debug"
         defines "HF_DEBUG"
         symbols "On"
+        buildoptions "/MDd"
 
     filter "configurations:Release"
         defines "HF_RELEASE"
         symbols "On"
         optimize "On"
+        buildoptions "/MDd"
 
     filter "configurations:Retail"
         defines "HF_RETAIL"
         optimize "On"
+        buildoptions "/MDd"
 

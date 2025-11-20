@@ -48,7 +48,8 @@ project "GameEngine"
         defines
         {
             "HF_PLATFORM_WINDOWS",
-            "HF_BUILD_DLL"
+            "HF_BUILD_DLL",
+            "GLFW_INCLUDE_NONE"
         }
 
         postbuildcommands

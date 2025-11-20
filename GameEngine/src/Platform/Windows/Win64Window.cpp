@@ -1,6 +1,8 @@
 #include "Win64Window.h"
 #include "hf/Log.h"
 
+#include <glad/glad.h>
+
 //Events
 #include "hf/Events/WindowEvent.h"
 
@@ -45,6 +47,15 @@ bool hf::Win64Window::Init()
 		return false;
 	}
 	glfwMakeContextCurrent(m_Window);
+
+    //Initialise Glad
+    int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+    if (status == 0)
+    {
+        HF_CORE_ERROR("Failed to initialise Glad");
+        return false;
+    }
+
 	SetVSync(true);
 
 	//Store *this inside the GLFW window

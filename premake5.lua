@@ -29,13 +29,16 @@ project "GameEngine"
         "%{prj.location}/src",
         "%{prj.location}/ThirdParty/spdlog/include",
         "%{prj.location}/ThirdParty/glfw/include",
-        "%{prj.location}/ThirdParty/glad/include"
+        "%{prj.location}/ThirdParty/glad/include",
+        "%{prj.location}/ThirdParty/imgui.h",
+
     }
 
     links
     {
         "glfw",
         "glad",
+        "imgui",
         "opengl32.lib"
     }
 
@@ -75,6 +78,7 @@ project "GameEngine"
     
 include "GameEngine/ThirdParty/glfw"
 include "GameEngine/ThirdParty/glad"
+include "GameEngine/ThirdParty/imgui"
 
 project "Sandbox"
     location "Sandbox"

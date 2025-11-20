@@ -4,3 +4,6 @@
 [submodule "GameEngine/ThirdParty/glfw"]
 	path = GameEngine/ThirdParty/glfw
 	url = https://github.com/Ephialtes-92/glfw
+[submodule "GameEngine/ThirdParty/imgui"]
+	path = GameEngine/ThirdParty/imgui
+	url = https://github.com/Ephialtes-92/imgui

@@ -28,12 +28,14 @@ project "GameEngine"
     {
         "%{prj.location}/src",
         "%{prj.location}/ThirdParty/spdlog/include",
-        "%{prj.location}/ThirdParty/glfw/include"
+        "%{prj.location}/ThirdParty/glfw/include",
+        "%{prj.location}/ThirdParty/glad/include"
     }
 
     links
     {
         "glfw",
+        "glad",
         "opengl32.lib"
     }
 
@@ -63,17 +65,15 @@ project "GameEngine"
         defines "HF_RELEASE"
         symbols "On"
         optimize "On"
-        buildoptions "/MDd"
+        buildoptions "/MT"
 
     filter "configurations:Retail"
         defines "HF_RETAIL"
         optimize "On"
-        buildoptions "/MDd"
-
-    --filter { "system:windows", "configurations:Release"}
-        --buildoptions "/MT"
+        buildoptions "/MT"
     
 include "GameEngine/ThirdParty/glfw"
+include "GameEngine/ThirdParty/glad"
 
 project "Sandbox"
     location "Sandbox"
@@ -120,10 +120,10 @@ project "Sandbox"
         defines "HF_RELEASE"
         symbols "On"
         optimize "On"
-        buildoptions "/MDd"
+        buildoptions "/MT"
 
     filter "configurations:Retail"
         defines "HF_RETAIL"
         optimize "On"
-        buildoptions "/MDd"
+        buildoptions "/MT"
 

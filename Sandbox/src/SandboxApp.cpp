@@ -1,5 +1,7 @@
 #include <Hephaestus.h>
 
+#include <hf/Imgui/ImGuiLayer.h>
+
 //Ecaple Layer to be removed later
 class Examplelayer : public hf::Layer::Layer
 {
@@ -36,6 +38,7 @@ public :
     {
         HF_CORE_INFO("Sandbox Application Created");
         PushLayer(new Examplelayer());  
+        PushLayer(new hf::ImGui::ImGuiLayer());
     }
 
 	~Sandbox() {}
